@@ -1,7 +1,7 @@
 
 
 resource "aws_api_gateway_model" "getbyid_input" {
-  provider     = "aws.current"
+  provider     = aws.current
   rest_api_id  = "${aws_api_gateway_rest_api.movies.id}"
   name         = "GetByIdInput"
   description  = "Get a specific movies by id"
@@ -19,7 +19,7 @@ EOF
 }
 
 resource "aws_api_gateway_model" "getbyid_output" {
-  provider     = "aws.current"
+  provider     = aws.current
   rest_api_id  = "${aws_api_gateway_rest_api.movies.id}"
   name         = "GetByIdOutput"
   description  = "Get a specific movies by id"

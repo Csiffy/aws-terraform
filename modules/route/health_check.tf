@@ -1,7 +1,7 @@
 
 
 resource "aws_route53_health_check" "this" {
-  provider          = "aws.current"
+  provider          = aws.current
   fqdn              = "${var.alb_dns}"
   port              = 80
   type              = "HTTP"

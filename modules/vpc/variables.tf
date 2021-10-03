@@ -1,12 +1,4 @@
 
-# Amazon Linux AMI 2017.03.1 (HVM), SSD Volume Type
-variable "aws_amis" {
-  default = {
-    eu-west-1 = "ami-ebd02392"
-    eu-west-2 = "ami-489f8e2c"
-  }
-}
-
 variable "name" {
   description = "Name to be used on all the resources as identifier"
   default     = ""
@@ -14,10 +6,20 @@ variable "name" {
 
 variable "aws_region" {}
 
+variable "aws_short_region" {}
+
 variable "account" {
   description = ""
   default = "TEST"
 }
+
+variable "project" {}
+
+variable "environment" {}
+
+variable "location" {}
+
+variable "service_name" {}
 
 variable "cidr" {
   description = "The CIDR block for the VPC"
@@ -49,11 +51,6 @@ variable "map_public_ip_on_launch" {
   default     = true
 }
 
-variable "tags" {
-  description = "A map of tags to add to all resources"
-  default     = {}
-}
-
 variable "public_subnet_tags" {
   description = "Additional tags for the public subnets"
   default     = {}
@@ -62,4 +59,21 @@ variable "public_subnet_tags" {
 variable "private_subnet_tags" {
   description = "Additional tags for the public subnets"
   default     = {}
+}
+
+variable "tags" {
+  description = "A map of the tags to use for the resources that are deployed"
+  type        = map
+  default = {}
+}
+
+locals {
+  common_tags = {
+    Project = var.project
+    Environment = var.environment
+    Managed_By = "terraform"
+    Location = var.location
+    OwnerName = "Csiffy"
+    OwnerCode = "C001"
+  }
 }

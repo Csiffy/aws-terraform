@@ -4,63 +4,63 @@
 ##########################################################
 
 resource "aws_api_gateway_resource" "movies" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   parent_id   = "${aws_api_gateway_rest_api.movies.root_resource_id}"
   path_part   = "movies"
 }
 
 resource "aws_api_gateway_resource" "getall" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   parent_id   = "${aws_api_gateway_resource.movies.id}"
   path_part   = "getall"
 }
 
 resource "aws_api_gateway_resource" "getbyid" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   parent_id   = "${aws_api_gateway_resource.movies.id}"
   path_part   = "getbyid"
 }
 
 resource "aws_api_gateway_resource" "getbyid_id" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   parent_id   = "${aws_api_gateway_resource.getbyid.id}"
   path_part   = "{id}"
 }
 
 resource "aws_api_gateway_resource" "getbyname" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   parent_id   = "${aws_api_gateway_resource.movies.id}"
   path_part   = "getbyname"
 }
 
 resource "aws_api_gateway_resource" "getbyname_name" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   parent_id   = "${aws_api_gateway_resource.getbyname.id}"
   path_part   = "{name}"
 }
 
 resource "aws_api_gateway_resource" "add" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   parent_id   = "${aws_api_gateway_resource.movies.id}"
   path_part   = "add"
 }
 
 resource "aws_api_gateway_resource" "deletebyid" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   parent_id   = "${aws_api_gateway_resource.movies.id}"
   path_part   = "deletebyid"
 }
 
 resource "aws_api_gateway_resource" "deletebyid_id" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   parent_id   = "${aws_api_gateway_resource.deletebyid.id}"
   path_part   = "{id}"
@@ -71,7 +71,7 @@ resource "aws_api_gateway_resource" "deletebyid_id" {
 ##########################################################
 
 resource "aws_api_gateway_method" "movies_getall" {
-  provider      = "aws.current"
+  provider      = aws.current
   rest_api_id   = "${aws_api_gateway_rest_api.movies.id}"
   resource_id   = "${aws_api_gateway_resource.getall.id}"
   http_method   = "GET"
@@ -83,7 +83,7 @@ resource "aws_api_gateway_method" "movies_getall" {
 }
 
 resource "aws_api_gateway_method" "movies_getbyid" {
-  provider      = "aws.current"
+  provider      = aws.current
   rest_api_id   = "${aws_api_gateway_rest_api.movies.id}"
   resource_id   = "${aws_api_gateway_resource.getbyid_id.id}"
   http_method   = "GET"
@@ -93,7 +93,7 @@ resource "aws_api_gateway_method" "movies_getbyid" {
 }
 
 resource "aws_api_gateway_method" "movies_getbyname" {
-  provider      = "aws.current"
+  provider      = aws.current
   rest_api_id   = "${aws_api_gateway_rest_api.movies.id}"
   resource_id   = "${aws_api_gateway_resource.getbyname_name.id}"
   http_method   = "GET"
@@ -104,7 +104,7 @@ resource "aws_api_gateway_method" "movies_getbyname" {
 }
 
 resource "aws_api_gateway_method" "movies_add" {
-  provider      = "aws.current"
+  provider      = aws.current
   rest_api_id   = "${aws_api_gateway_rest_api.movies.id}"
   resource_id   = "${aws_api_gateway_resource.add.id}"
   http_method   = "POST"
@@ -114,7 +114,7 @@ resource "aws_api_gateway_method" "movies_add" {
 }
 
 resource "aws_api_gateway_method" "deletebyid" {
-  provider      = "aws.current"
+  provider      = aws.current
   rest_api_id   = "${aws_api_gateway_rest_api.movies.id}"
   resource_id   = "${aws_api_gateway_resource.deletebyid_id.id}"
   http_method   = "DELETE"
@@ -124,7 +124,7 @@ resource "aws_api_gateway_method" "deletebyid" {
 }
 
 #resource "aws_api_gateway_method" "movies_post" {
-#  provider      = "aws.current"
+#  provider      = aws.current
 #  rest_api_id   = "${aws_api_gateway_rest_api.movies.id}"
 #  resource_id   = "${aws_api_gateway_resource.movies.id}"
 #  http_method   = "POST"
@@ -150,7 +150,7 @@ resource "aws_api_gateway_method" "deletebyid" {
 #}
 
 resource "aws_api_gateway_integration" "movies_getall" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getall.id}"
   http_method = "${aws_api_gateway_method.movies_getall.http_method}"
@@ -168,7 +168,7 @@ resource "aws_api_gateway_integration" "movies_getall" {
 }
 
 resource "aws_api_gateway_integration" "getbyid" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getbyid_id.id}"
   http_method = "${aws_api_gateway_method.movies_getbyid.http_method}"
@@ -186,7 +186,7 @@ resource "aws_api_gateway_integration" "getbyid" {
 }
 
 resource "aws_api_gateway_integration" "getbyname" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getbyname_name.id}"
   http_method = "${aws_api_gateway_method.movies_getbyname.http_method}"
@@ -204,7 +204,7 @@ resource "aws_api_gateway_integration" "getbyname" {
 }
 
 resource "aws_api_gateway_integration" "add" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.add.id}"
   http_method = "${aws_api_gateway_method.movies_add.http_method}"
@@ -222,7 +222,7 @@ resource "aws_api_gateway_integration" "add" {
 }
 
 resource "aws_api_gateway_integration" "deletebyid" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.deletebyid_id.id}"
   http_method = "${aws_api_gateway_method.deletebyid.http_method}"
@@ -245,7 +245,7 @@ resource "aws_api_gateway_integration" "deletebyid" {
 ##########################################################
 
 resource "aws_api_gateway_integration_response" "movies_getall_ok" {
-  provider    = "aws.current"
+  provider    = aws.current
   depends_on  = ["aws_api_gateway_integration.movies_getall"]
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getall.id}"
@@ -269,7 +269,7 @@ resource "aws_api_gateway_integration_response" "movies_getall_ok" {
 }
 
 resource "aws_api_gateway_integration_response" "movies_getall_error" {
-  provider    = "aws.current"
+  provider    = aws.current
   depends_on  = ["aws_api_gateway_integration.movies_getall"]
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getall.id}"
@@ -282,7 +282,7 @@ resource "aws_api_gateway_integration_response" "movies_getall_error" {
 }
 
 resource "aws_api_gateway_integration_response" "movies_getbyid_ok" {
-  provider    = "aws.current"
+  provider    = aws.current
   depends_on  = ["aws_api_gateway_integration.getbyid"]
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getbyid_id.id}"
@@ -295,7 +295,7 @@ resource "aws_api_gateway_integration_response" "movies_getbyid_ok" {
 }
 
 resource "aws_api_gateway_integration_response" "movies_getbyid_error" {
-  provider    = "aws.current"
+  provider    = aws.current
   depends_on  = ["aws_api_gateway_integration.getbyid"]
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getbyid_id.id}"
@@ -312,7 +312,7 @@ resource "aws_api_gateway_integration_response" "movies_getbyid_error" {
 ##########################################################
 
 resource "aws_api_gateway_method_response" "getall_200" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getall.id}"
   http_method = "${aws_api_gateway_method.movies_getall.http_method}"
@@ -322,7 +322,7 @@ resource "aws_api_gateway_method_response" "getall_200" {
 }
 
 resource "aws_api_gateway_method_response" "getall_400" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getall.id}"
   http_method = "${aws_api_gateway_method.movies_getall.http_method}"
@@ -332,7 +332,7 @@ resource "aws_api_gateway_method_response" "getall_400" {
 }
 
 resource "aws_api_gateway_method_response" "getbyid_200" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getbyid_id.id}"
   http_method = "${aws_api_gateway_method.movies_getbyid.http_method}"
@@ -342,7 +342,7 @@ resource "aws_api_gateway_method_response" "getbyid_200" {
 }
 
 resource "aws_api_gateway_method_response" "getbyid_400" {
-  provider    = "aws.current"
+  provider    = aws.current
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   resource_id = "${aws_api_gateway_resource.getbyid_id.id}"
   http_method = "${aws_api_gateway_method.movies_getbyid.http_method}"
@@ -356,7 +356,7 @@ resource "aws_api_gateway_method_response" "getbyid_400" {
 ##########################################################
 
 resource "aws_api_gateway_request_validator" "all" {
-  provider      = "aws.current"
+  provider      = aws.current
   name = "validate_body_and_parameters"
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   validate_request_body = true
@@ -364,7 +364,7 @@ resource "aws_api_gateway_request_validator" "all" {
 }
 
 resource "aws_api_gateway_request_validator" "parameters" {
-  provider      = "aws.current"
+  provider      = aws.current
   name = "validate_parameters"
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   validate_request_body = false
@@ -372,7 +372,7 @@ resource "aws_api_gateway_request_validator" "parameters" {
 }
 
 resource "aws_api_gateway_request_validator" "body" {
-  provider      = "aws.current"
+  provider      = aws.current
   name = "validate_body"
   rest_api_id = "${aws_api_gateway_rest_api.movies.id}"
   validate_request_body = true

@@ -1,12 +1,12 @@
 
 resource "aws_iam_role" "ecs_service_role" {
-  provider = "aws.current"
+  provider = aws.current
   name = "${var.name}"
   assume_role_policy = "${data.aws_iam_policy_document.ecs_service_role.json}"
 }
 
 data "aws_iam_policy_document" "ecs_service_role" {
-  provider = "aws.current"
+  provider = aws.current
   statement {
     effect = "Allow"
     actions = ["sts:AssumeRole"]
@@ -18,14 +18,14 @@ data "aws_iam_policy_document" "ecs_service_role" {
 }
 
 resource "aws_iam_role_policy" "ecs_service_policy" {
-  provider = "aws.current"
+  provider = aws.current
   name = "${var.name}-ecs-service-policy"
   role = "${aws_iam_role.ecs_service_role.id}"
   policy = "${data.aws_iam_policy_document.ecs_service_policy.json}"
 }
 
 data "aws_iam_policy_document" "ecs_service_policy" {
-  provider = "aws.current"
+  provider = aws.current
   statement {
     effect = "Allow"
     resources = ["*"]

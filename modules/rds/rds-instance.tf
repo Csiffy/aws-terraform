@@ -1,6 +1,6 @@
 
 resource "aws_db_instance" "postgres" {
-  provider             = "aws.current"
+  provider             = aws.current
   allocated_storage    = 20
   storage_type         = "gp2"
   storage_encrypted    = false
@@ -28,7 +28,7 @@ resource "aws_db_instance" "postgres" {
 
 /*
 resource "aws_db_parameter_group" "default" {
-  provider = "aws.current"
+  provider = aws.current
   name     = "rds-pg"
   family   = "postgres96"
 
@@ -44,7 +44,7 @@ resource "aws_db_parameter_group" "default" {
 }
 
 resource "aws_db_security_group" "default" {
-  provider = "aws.current"
+  provider = aws.current
   name     = "rds_sg"
 
   ingress {
@@ -54,7 +54,7 @@ resource "aws_db_security_group" "default" {
 */
 
 resource "aws_db_subnet_group" "default" {
-  provider   = "aws.current"
+  provider   = aws.current
   name       = "db-subnet-group"
   subnet_ids = ["${var.private_subnets}"]
 

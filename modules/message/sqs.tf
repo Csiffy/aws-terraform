@@ -1,11 +1,11 @@
 
 resource "aws_sqs_queue" "this" {
-  provider = "aws.current"
+  provider = aws.current
   name     = "${var.name}-sqs-queue"
 }
 
 resource "aws_sqs_queue_policy" "test" {
-  provider  = "aws.current"
+  provider  = aws.current
   queue_url = "${aws_sqs_queue.this.id}"
 
   policy    = <<POLICY
