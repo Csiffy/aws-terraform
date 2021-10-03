@@ -1,18 +1,18 @@
 
 resource "aws_sns_topic" "this" {
-  provider     = "aws.current"
+  provider     = aws.current
   name         = "${var.name}-sns-topic"
   display_name = "${var.name}-sns-topic-display"
 }
 
 resource "aws_sns_topic_policy" "default" {
-  provider = "aws.current"
+  provider = aws.current
   arn      = "${aws_sns_topic.this.arn}"
   policy   = "${data.aws_iam_policy_document.sns-topic-policy.json}"
 }
 
 data "aws_iam_policy_document" "sns-topic-policy" {
-  provider     = "aws.current"
+  provider     = aws.current
   statement {
     actions = [
       "SNS:Subscribe",
@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "sns-topic-policy" {
 }
 
 resource "aws_sns_topic_subscription" "sns-topic" {
-  provider  = "aws.current"
+  provider  = aws.current
   topic_arn = "${aws_sns_topic.this.arn}"
   protocol  = "sqs"
   #protocol = "lambda"
@@ -48,7 +48,7 @@ resource "aws_sns_topic_subscription" "sns-topic" {
 
 /*
 resource "aws_s3_bucket_notification" "img_upload_bucket_notification" {
-  provider = "aws.current"
+  provider = aws.current
   bucket   = "${var.s3_bucket}"
 
   topic {

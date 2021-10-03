@@ -1,6 +1,6 @@
 
 resource "aws_security_group" "ecs_instance" {
-  provider = "aws.current"
+  provider = aws.current
   name = "${var.name}"
   description = "Security group for the EC2 instances in the ECS cluster ${var.name}"
   vpc_id = "${var.vpc_id}"
@@ -11,7 +11,7 @@ resource "aws_security_group" "ecs_instance" {
 }
 
 resource "aws_security_group_rule" "all_outbound_all" {
-  provider = "aws.current"
+  provider = aws.current
   type = "egress"
   from_port = 0
   to_port = 0
@@ -21,7 +21,7 @@ resource "aws_security_group_rule" "all_outbound_all" {
 }
 
 resource "aws_security_group_rule" "all_inbound_ports" {
-  provider = "aws.current"
+  provider = aws.current
   count = "${length(var.allow_inbound_ports_and_cidr_blocks)}"
   type = "ingress"
   from_port = "${element(keys(var.allow_inbound_ports_and_cidr_blocks), count.index)}"

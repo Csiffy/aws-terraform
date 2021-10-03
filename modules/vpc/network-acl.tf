@@ -1,6 +1,6 @@
 
 resource "aws_network_acl" "public" {
-  provider   = "aws.current"
+  provider   = aws.current
   count      = "${length(var.public_subnets)}"
 
   vpc_id     = "${aws_vpc.this.id}"
@@ -78,7 +78,7 @@ resource "aws_network_acl" "public" {
     to_port    = 65535
   }
 
-  tags = "${merge(var.tags, map("Name", format("%s-public-acl", var.name)))}"
+  tags     = merge(local.common_tags, local.module_tags, tomap({"Name" = format("acl-%s-%s-%s-public", var.aws_short_region, split("-", element(var.azs, count.index))[2], var.environment)}))
 
 }
 

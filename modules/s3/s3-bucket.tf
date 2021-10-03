@@ -1,7 +1,7 @@
 
 
 resource "aws_s3_bucket" "this" {
-  provider = "aws.current"
+  provider = aws.current
   bucket   = "aws-test-bucket-${var.name}"
   acl      = "private"
 

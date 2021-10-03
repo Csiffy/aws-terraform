@@ -1,6 +1,6 @@
 
 resource "aws_autoscaling_group" "ecs_cluster_instances" {
-  provider = "aws.current"
+  provider = aws.current
   name     = "${var.name}"
   min_size = "${var.size}"
   max_size = "${var.size}"
@@ -18,7 +18,7 @@ resource "aws_autoscaling_group" "ecs_cluster_instances" {
 
 # Fetch the AWS ECS Optimized Linux AMI.
 data "aws_ami" "ecs" {
-  provider = "aws.current"
+  provider = aws.current
   most_recent = true
   owners = ["amazon"]
   filter {
@@ -29,7 +29,7 @@ data "aws_ami" "ecs" {
 
 # The launch configuration for each EC2 Instance that will run in the ECS Cluster
 resource "aws_launch_configuration" "ecs_instance" {
-  provider = "aws.current"
+  provider = aws.current
   name_prefix   = "${var.name}-"
   instance_type = "${var.instance_type}"
   key_name      = "${var.key_pair_name}"

@@ -4,7 +4,7 @@
 #########################################################################
 
 resource "aws_iam_role" "iam_for_lambda" {
-  provider         = "aws.current"
+  provider         = aws.current
   name = "iam_role_for_${var.name}-lambda-function"
 
   assume_role_policy = <<EOF
@@ -40,7 +40,7 @@ resource "aws_lambda_permission" "allow_apigateway" {
 #########################################################################
 
 resource "aws_lambda_function" "this" {
-  provider         = "aws.current"
+  provider         = aws.current
   filename         = "lambda-${var.name}.zip"
   source_code_hash = "${base64sha256(file("lambda-${var.name}.zip"))}"
   function_name    = "${var.name}"
@@ -62,7 +62,7 @@ resource "aws_lambda_function" "this" {
 
 /*
 resource "aws_lambda_alias" "test_alias" {
-  provider         = "aws.current"
+  provider         = aws.current
   name             = "testalias"
   description      = "a sample description"
   function_name    = "${aws_lambda_function.lambda_function_test.arn}"
@@ -72,7 +72,7 @@ resource "aws_lambda_alias" "test_alias" {
 
 #In the aws_lambda_function -> source_code_hash = "${base64sha256(file("${data.archive_file.lambda.output_path}"))}"
 data "archive_file" "lambda" {
-  provider    = "aws.current"
+  provider    = aws.current
   type        = "zip"
   source_file = "${var.name}.py"
   output_path = "lambda-${var.name}.zip"

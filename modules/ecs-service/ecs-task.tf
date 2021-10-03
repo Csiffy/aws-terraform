@@ -1,6 +1,6 @@
 
 resource "aws_ecs_task_definition" "this" {
-  provider = "aws.current"
+  provider = aws.current
   family = "${var.name}"
   container_definitions = <<EOF
 [
@@ -24,7 +24,7 @@ EOF
 }
 
 data "template_file" "env_vars" {
-#  provider = "aws.current"
+#  provider = aws.current
   count = "${var.num_env_vars}"
   template = <<EOF
 {"name": "${element(keys(var.env_vars), count.index)}", "value": "${lookup(var.env_vars, element(keys(var.env_vars), count.index))}"}

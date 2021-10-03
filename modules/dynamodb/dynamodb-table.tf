@@ -1,6 +1,6 @@
 
 resource "aws_dynamodb_table" "checkin_table" {
-  provider       = "aws.current"
+  provider       = aws.current
   name           = "${var.name}-checkin-table"
   read_capacity  = 20
   write_capacity = 20
@@ -17,7 +17,7 @@ resource "aws_dynamodb_table" "checkin_table" {
 }
 
 resource "aws_dynamodb_table" "placeid_table" {
-  provider       = "aws.current"
+  provider       = aws.current
   name           = "${var.name}-restaurant-table"
   read_capacity  = 20
   write_capacity = 20

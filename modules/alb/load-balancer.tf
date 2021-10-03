@@ -1,7 +1,7 @@
 
 
 resource "aws_security_group" "this" {
-  provider    = "aws.current"
+  provider    = aws.current
   name        = "${var.name}-alb_sg"
   description = "Application Load Balancing security group"
   vpc_id      = "${var.vpc}"
@@ -24,7 +24,7 @@ resource "aws_security_group" "this" {
 }
 
 resource "aws_alb_target_group" "this" {
-  provider = "aws.current"
+  provider = aws.current
   name     = "${var.name}-alb-tg"
   port     = 80
   protocol = "HTTP"
@@ -32,7 +32,7 @@ resource "aws_alb_target_group" "this" {
 }
 
 #resource "aws_alb_target_group_attachment" "this" {
-#  provider         = "aws.current"
+#  provider         = aws.current
 #  count            = "${var.count_number}"
 #  target_group_arn = "${aws_alb_target_group.this.arn}"
 #  #target_id       = "${var.instances}"
@@ -41,7 +41,7 @@ resource "aws_alb_target_group" "this" {
 #}
 
 resource "aws_alb" "this" {
-  provider        = "aws.current"
+  provider        = aws.current
 #  count           = "${var.count_number}"
   subnets         = ["${var.public_subnets}"]
   security_groups = ["${aws_security_group.this.id}"]
@@ -53,7 +53,7 @@ resource "aws_alb" "this" {
 }
 
 resource "aws_alb_listener" "this" {
-  provider          = "aws.current"
+  provider          = aws.current
   load_balancer_arn = "${aws_alb.this.arn}"
   port              = "80"
   protocol          = "HTTP"
@@ -65,7 +65,7 @@ resource "aws_alb_listener" "this" {
 }
 
 resource "aws_alb_listener_rule" "this" {
-  provider     = "aws.current"
+  provider     = aws.current
   listener_arn = "${aws_alb_listener.this.arn}"
   priority     = 100
 

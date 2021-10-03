@@ -3,7 +3,7 @@
 # Our default security group to access
 # the instances over SSH and HTTP
 resource "aws_security_group" "instance-sg" {
-  provider = "aws.current"
+  provider = aws.current
   count    = "${var.count_number}"
 
   name        = "${format("instance-%d", count.index)}"
@@ -36,10 +36,10 @@ resource "aws_security_group" "instance-sg" {
 }
 
 resource "aws_instance" "this" {
-  provider = "aws.current"
+  provider = aws.current
   connection {
     # The default username for the instance
-    user = "ec2-user"
+    user = "admin"
   }
   instance_type = "t2.micro"
   ami = "${lookup(var.aws_amis, var.aws_region)}"
@@ -70,6 +70,6 @@ resource "aws_instance" "this" {
     ]
   }
 
-  tags = "${merge(var.tags, map("Name", format("%s-%d", var.name, count.index)))}"
+  tags = merge(local.common_tags, local.module_tags, var.private_subnet_tags, tomap({"Name" = format("ec2-%s-%s-%s-%s-%s", var.aws_short_region, split("-", element(var.azs, count.index))[2], var.environment, var.service, count.index)}))
 }
 

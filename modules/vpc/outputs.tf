@@ -87,8 +87,8 @@ output "public_internet_gateway_id" {
   value = ["${aws_internet_gateway.public.*.id}"]
 }
 
-output "aws_region" {
-  value = "${var.aws_region}"
+output "location" {
+  value = "${var.location}"
 }
 
 

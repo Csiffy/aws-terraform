@@ -1,18 +1,18 @@
 
 
 resource "aws_route53_zone" "main" {
-  provider = "aws.current"
+  provider = aws.current
   name     = "example.com"
 }
 
 resource "aws_route53_zone" "dev" {
-  provider = "aws.current"
+  provider = aws.current
   name     = "dev.example.com"
   tags     = "${merge(var.tags, map("Name", format("%s-53zone", var.name)))}"
 }
 
 resource "aws_route53_record" "dev-ns" {
-  provider = "aws.current"
+  provider = aws.current
   zone_id  = "${aws_route53_zone.main.zone_id}"
   name     = "dev.example.com"
   type     = "NS"

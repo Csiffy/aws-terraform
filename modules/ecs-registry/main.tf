@@ -1,12 +1,12 @@
 
 
 resource "aws_ecr_repository" "this" {
-  provider = "aws.current"
+  provider = aws.current
   name     = "${var.namespace}/${var.repository}"
 }
 
 resource "aws_ecr_repository_policy" "this" {
-  provider   = "aws.current"
+  provider   = aws.current
   repository = "${aws_ecr_repository.this.name}"
 
   policy     = <<EOF

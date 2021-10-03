@@ -1,6 +1,6 @@
 
 resource "aws_kinesis_stream" "this" {
-  provider         = "aws.current"
+  provider         = aws.current
   name             = "${var.name}-stream"
   shard_count      = 1
   retention_period = 48

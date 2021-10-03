@@ -1,6 +1,6 @@
 
 resource "aws_ecs_cluster" "this" {
-  provider = "aws.current"
+  provider = aws.current
   name     = "${var.name}"
 }
 
