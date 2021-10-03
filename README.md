@@ -88,7 +88,6 @@ variable "account_secrets" {
 ```
 
 Create a new project and use for example the vpc module
-
 ```
 // for example in the main.tf file
 module "xxxxx_vpc" {
